@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Add Car</title>
+
+  <link rel="stylesheet"
+        type="text/css"
+        href="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.css" />
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+        crossorigin="anonymous" />
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+
+  <style>header{background-color: #248eff;; width: 100%; padding: 10px; box-sizing:border-box;}
+	.bg-image { position: fixed; top: 0; left: 0; width: 100%; height: 100%; filter: blur(2.5px); z-index: -1;}
+    .container{position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);}
+</style>
+
+
+</head>
+<body>
+
+<header>
+  <div class="header">
+    <img src="images/logo-no-background.png" alt="logo" height="75" width="350" style="float: left;">
+    <a href="/login" style="color:white; float: right;" class="btn btn-danger ml-2">Log Out!</a>
+    <div style="clear: both;"></div>
+  </div>
+</header>
+
+</head>
+
+<div class="bg-image">
+  <img src="images/business.jpg" width="2000">
+</div>
+
+<br></br>
+
+<div class="container">
+
+  <form th:action="@{/saveCar}" th:object="${car}" method="POST">
+
+    <input type="text" th:field="*{name}" class="form-control col-4 mb-4" placeholder="Enter Name" required/>
+
+    <input type="text" th:field="*{brand}" class="form-control col-4 mb-4" placeholder="Enter Brand" required/>
+
+    <input type="number" th:field="*{price}" class="form-control col-4 mb-4" min="10000" max="50000" placeholder="Enter Price" required/>
+
+    <input type="number" th:field="*{year}" class="form-control col-4 mb-4" min="1990" max="2023" placeholder="Enter Year" required/>
+
+    <button type="submit" class="btn btn-primary col-2">Save</button>
+    <input type="hidden" th:field="*{id}" />
+
+  </form>
+  <hr/>
+  <a th:href="@{/listAll}">Back to list</a>
+</div>
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js"></script>
+
+</body>
+</html>

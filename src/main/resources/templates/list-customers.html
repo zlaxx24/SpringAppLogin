@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet"
+	  type="text/css"
+	  href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+	  integrity ="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+	  crossorigin="anonymous" />
+<link rel="stylesheet"
+	  type="text/css"
+	  href="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.css" />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<title>LuxuryRideCo - Customers</title>
+			<style>
+			header{background-color: #248eff; width: 100%; padding: 10px; box-sizing:border-box;}
+			.bg-image { position: fixed; top: 0; left: 0; width: 100%; height: 100%; filter: blur(2.5px); z-index: -1;}
+</style>
+
+	<header>
+		<div class="header">
+			<img src="images/logo-no-background.png" alt="logo" height="75" width="350" style="float: left;">
+			<a href="/login" style="color:white; float: right;" class="btn btn-danger ml-2">Log Out!</a>
+			<div style="clear: both;"></div>
+		</div>
+	</header>
+
+</head>
+		
+	
+	<body>
+	<div class="bg-image">
+		<img src="images/business.jpg" width="2000">
+	</div>
+		<div class="container"style="background-color: white;">
+
+			<hr>
+			<a th:href="@{/addCustomerForm}" class="btn btn-primary">Add Customer</a>
+			<br></br>
+			<table class="table table-bordered table-striped" id="customerTable">
+			
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Age</th>
+						<th>Password</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="customer: ${customer}">
+						<td th:text="${customer.name}" />
+						<td th:text="${customer.email}" />
+						<td th:text="${customer.age}" />
+						<td th:text="${customer.password}" />
+						<td>
+							<a th:href="@{/showUpdateForm(customerId=${customer.id})}" class="btn btn-info">Update</a>
+							
+							<a th:href="@{/deleteCustomer(customerId=${customer.id})}" class="btn btn-danger ml-2">Delete</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js"></script>
+		
+		<script>
+			$(document).ready(function() {
+				$("#customerTable").DataTable({
+						'aoColumnDefs': [{
+        				'bSortable': false,
+        				'aTargets': [-1] /* 1st one, start by the right */
+    				}]
+				});
+			})
+		</script>
+	</body>
+	
+</html>
